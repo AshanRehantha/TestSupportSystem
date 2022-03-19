@@ -30,7 +30,10 @@ class TicketController extends Controller
     public function show($id){
        $data = $this->ticketRepositories->getUserTicketById($id);
        $reply = $this->ticketRepositories->getReplyTicketDetailsByID($id);
-       return view('Ticket.show', compact('data', 'reply'));
+       if($data !== null){
+        return view('Ticket.show', compact('data', 'reply'));
+       }
+       return view('error.404');
     }
     public function getAdminTicketById($id){
         $data = $this->ticketRepositories->getAdminTicketById($id);
